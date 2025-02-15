@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsuoq2tpw3x03"]
+[gd_scene load_steps=6 format=3 uid="uid://dsuoq2tpw3x03"]
 
 [ext_resource type="Texture2D" uid="uid://dfdxr6lmew12r" path="res://background.png" id="1_2h6n8"]
+[ext_resource type="Script" path="res://background.gd" id="2_k5ylo"]
 [ext_resource type="Script" path="res://shuttle.gd" id="2_kr6h2"]
 [ext_resource type="Texture2D" uid="uid://bgtc6x7trs4hf" path="res://CircleTest.svg" id="2_se5vs"]
 
@@ -8,40 +9,25 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="shuttle" type="CharacterBody2D" parent="."]
-position = Vector2(238, 158)
-script = ExtResource("2_kr6h2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shuttle"]
-position = Vector2(-10, 139)
-shape = SubResource("CircleShape2D_vy7gv")
-
-[node name="Sprite2D" type="Sprite2D" parent="shuttle"]
-z_index = 1
-position = Vector2(-9, 135)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_se5vs")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -4.0
-offset_top = 6.0
-offset_right = 36.0
-offset_bottom = 46.0
-
-[node name="Background" type="TextureRect" parent="Control"]
-layout_direction = 2
-layout_mode = 1
+[node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -1.0
-offset_right = 1996.0
-offset_bottom = 971.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2h6n8")
 expand_mode = 3
 stretch_mode = 4
+script = ExtResource("2_k5ylo")
+
+[node name="shuttle" type="CharacterBody2D" parent="."]
+position = Vector2(827, 413)
+script = ExtResource("2_kr6h2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shuttle"]
+shape = SubResource("CircleShape2D_vy7gv")
+
+[node name="Sprite2D" type="Sprite2D" parent="shuttle"]
+position = Vector2(15, -37)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_se5vs")
