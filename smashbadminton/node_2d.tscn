@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsuoq2tpw3x03"]
+[gd_scene load_steps=4 format=3 uid="uid://dsuoq2tpw3x03"]
 
 [ext_resource type="Texture2D" uid="uid://dfdxr6lmew12r" path="res://background.png" id="1_2h6n8"]
+[ext_resource type="Texture2D" uid="uid://bgtc6x7trs4hf" path="res://CircleTest.svg" id="2_se5vs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vy7gv"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_2h6n8")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_vy7gv")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(15, -37)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_se5vs")
