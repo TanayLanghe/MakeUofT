@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cd7radudxn03i"]
+[gd_scene load_steps=8 format=3 uid="uid://qki0mb5vy4iy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0wj0i"]
-[ext_resource type="PackedScene" uid="uid://d3r0mqljkipsh" path="res://Background.tscn" id="1_edccy"]
+[ext_resource type="PackedScene" path="res://Background.tscn" id="1_edccy"]
 [ext_resource type="PackedScene" uid="uid://u6xquirngojt" path="res://Player1/Player1.tscn" id="2_uwue5"]
 [ext_resource type="PackedScene" uid="uid://nl2dyeohth1k" path="res://Player2/Player2.tscn" id="4_ghj47"]
 [ext_resource type="PackedScene" uid="uid://b3a3vcrkyxr76" path="res://Player1/p1_racket/P1Racket.tscn" id="5_3ijvo"]
 [ext_resource type="PackedScene" uid="uid://dayx42jjcxhnv" path="res://Player2/p2_racket/P2_racket.tscn" id="6_8h7xj"]
+[ext_resource type="PackedScene" uid="uid://c0n8n3es80vb3" path="res://Shuttle/Shuttle.tscn" id="7_fwjf6"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0wj0i")
@@ -19,6 +20,7 @@ scale = Vector2(0.1, 0.1)
 [node name="P1Racket" parent="Player1" instance=ExtResource("5_3ijvo")]
 position = Vector2(2030, -330)
 scale = Vector2(2, 2)
+collision_layer = 2
 
 [node name="Player2" parent="." instance=ExtResource("4_ghj47")]
 position = Vector2(1343, 358)
@@ -27,3 +29,55 @@ scale = Vector2(0.1, 0.1)
 [node name="P2Racket" parent="Player2" instance=ExtResource("6_8h7xj")]
 position = Vector2(20, 2930)
 scale = Vector2(2, 2)
+collision_layer = 2
+
+[node name="Shuttle" parent="." instance=ExtResource("7_fwjf6")]
+visible = false
+position = Vector2(945, 419)
+collision_mask = 2
+
+[node name="GameEnd" type="Label" parent="."]
+visible = false
+offset_left = 440.0
+offset_top = 224.0
+offset_right = 1624.0
+offset_bottom = 497.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "GAME OVER
+"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 950.0
+offset_top = 56.0
+offset_right = 1122.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "0  :  0"
+
+[node name="PlayerWin" type="Label" parent="."]
+visible = false
+offset_left = 674.0
+offset_top = 610.0
+offset_right = 1375.0
+offset_bottom = 779.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Player 1 Wins!!"
+
+[node name="PlayersTurn" type="Label" parent="."]
+visible = false
+offset_left = 664.0
+offset_top = 658.0
+offset_right = 1366.0
+offset_bottom = 853.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+text = "Players 1's turn!
+Press swing to serve!"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Player1/P1Racket" to="Shuttle" method="_on_p_1_racket_body_entered"]
+[connection signal="body_entered" from="Player2/P2Racket" to="Shuttle" method="_on_p_2_racket_body_entered"]
