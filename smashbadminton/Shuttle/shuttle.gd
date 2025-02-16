@@ -118,7 +118,7 @@ func _on_p_1_racket_body_entered(body) -> void:
 	var rac1 = get_node("/root/Main/Player1/P1Racket")
 	if body is CharacterBody2D and rac1.swing == true:
 		var shift = randf_range(30, 100)
-		body.velocity.x = -SPEED
+		body.velocity.x = SPEED
 		if body.position.y >= 506:
 			body.velocity.y = -shift
 		if body.position.y < 506:
