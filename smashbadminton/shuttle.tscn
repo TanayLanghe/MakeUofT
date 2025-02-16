@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsuoq2tpw3x03"]
+
+[ext_resource type="Texture2D" uid="uid://bgtc6x7trs4hf" path="res://CircleTest.svg" id="1_lhmfe"]
+[ext_resource type="Script" path="res://shuttle.gd" id="1_te2nn"]
+[ext_resource type="Texture2D" uid="uid://dfdxr6lmew12r" path="res://background.png" id="2_kyo18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vy7gv"]
+radius = 19.105
+
+[node name="Node2D" type="Node2D"]
+
+[node name="shuttle" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(200, 200)
+script = ExtResource("1_te2nn")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shuttle"]
+position = Vector2(-1.00003, -1)
+shape = SubResource("CircleShape2D_vy7gv")
+
+[node name="Sprite2D" type="Sprite2D" parent="shuttle"]
+z_index = 1
+position = Vector2(-1.00003, -0.999985)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_lhmfe")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -4.0
+offset_top = 6.0
+offset_right = 36.0
+offset_bottom = 46.0
+
+[node name="Background" type="TextureRect" parent="Control"]
+z_index = -1
+z_as_relative = false
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1988.0
+offset_bottom = 972.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_kyo18")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="GameEnd" type="Label" parent="."]
+visible = false
+offset_left = 440.0
+offset_top = 224.0
+offset_right = 1624.0
+offset_bottom = 497.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "GAME OVER
+"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 950.0
+offset_top = 56.0
+offset_right = 1122.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "0  :  0"
+
+[node name="PlayerWin" type="Label" parent="."]
+visible = false
+offset_left = 674.0
+offset_top = 610.0
+offset_right = 1375.0
+offset_bottom = 779.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Player 1 Wins!!"

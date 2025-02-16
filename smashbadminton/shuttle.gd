@@ -1,29 +1,68 @@
 extends CharacterBody2D
 
 const SPEED = 800  # Movement speed
-var screen_width = 0  # Will be set dynamically
+var p1Score = 0
+var p2Score = 0
 
 func _ready():
 	await get_tree().process_frame
 	get_window().mode = Window.MODE_FULLSCREEN
-
+	var label = get_node("../Label")
+	label.visible = false
+	velocity.x =  -SPEED
 
 func _physics_process(delta):
 	var screen_size = get_viewport_rect().size
-	# Get movement input (left and right)
-	var direction = Input.get_axis("ui_left", "ui_right")
-	var vert_direction = Input.get_axis("ui_up", "ui_down")
-	if direction:
-		velocity.x = direction * SPEED  # Move left or right
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)  # Smooth stopping
-	if vert_direction:
-		velocity.y = vert_direction * SPEED  # Move left or right
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-
-	
+	if position.x >= screen_size.x - 47:
+		velocity.x = 0
+		velocity.y = 0
+		hide()
+		update_score("p1")
+	if position.x <= 56:
+		velocity.x = 0
+		velocity.y = 0
+		hide()
+		update_score("p2")
+	if position.y <= 132:
+		velocity.y = 0
+		velocity.x = 0
+		hide()
+		if position.x <= 1018:
+			update_score("p1")
+	if position.y >= screen_size.y - 134:
+		velocity.y = 0
+		velocity.x = 0
+		hide()
+		if position.x > 1018:
+			update_score("p2")
+		
 	move_and_slide()
-	position.x = clamp(position.x, -30, screen_size.x)
-	position.y = clamp(position.y, 30, screen_size.y+50)
+	position.x = clamp(position.x, 0, screen_size.x)
+	position.y = clamp(position.y, 0, screen_size.y - 150)
+	
+func update_score(player : String):
+	var label = get_node("../Label")
+	if player == "p1":
+		p1Score += 1
+	elif player == "p2":
+		p2Score += 1
+	label.visible = true
+	label.text = str(p1Score) + " : " + str(p2Score)
+	position = Vector2(976, 500)
+	await get_tree().create_timer(1.0).timeout
+	label.visible = false
+	if p1Score == 1 or p2Score == 1:
+		game_end()
+	show()
+
+func game_end():
+	var end = get_node("../GameEnd")
+	var winner = get_node("../PlayerWin")
+	if p1Score > p2Score:
+		winner.text = "Player 1 Wins!!"
+	elif p2Score > p1Score:
+		winner.text = "Player 2 Wins!!"
+	end.visible = true
+	winner.visible = true
+	Engine.time_scale = 0
 	
