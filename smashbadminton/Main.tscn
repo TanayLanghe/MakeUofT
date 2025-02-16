@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd7radudxn03i"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_0wj0i"]
+[ext_resource type="PackedScene" uid="uid://d3r0mqljkipsh" path="res://Background.tscn" id="1_edccy"]
+[ext_resource type="PackedScene" uid="uid://u6xquirngojt" path="res://Player1/Player1.tscn" id="2_uwue5"]
+[ext_resource type="PackedScene" uid="uid://nl2dyeohth1k" path="res://Player2/Player2.tscn" id="4_ghj47"]
+[ext_resource type="PackedScene" uid="uid://b3a3vcrkyxr76" path="res://Player1/p1_racket/P1Racket.tscn" id="5_3ijvo"]
+[ext_resource type="PackedScene" uid="uid://dayx42jjcxhnv" path="res://Player2/p2_racket/P2_racket.tscn" id="6_8h7xj"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0wj0i")
+
+[node name="Background" parent="." instance=ExtResource("1_edccy")]
+
+[node name="Player1" parent="." instance=ExtResource("2_uwue5")]
+position = Vector2(566, 585)
+scale = Vector2(0.1, 0.1)
+
+[node name="P1Racket" parent="Player1" instance=ExtResource("5_3ijvo")]
+position = Vector2(2030, -330)
+scale = Vector2(2, 2)
+
+[node name="Player2" parent="." instance=ExtResource("4_ghj47")]
+position = Vector2(1343, 358)
+scale = Vector2(0.1, 0.1)
+
+[node name="P2Racket" parent="Player2" instance=ExtResource("6_8h7xj")]
+position = Vector2(20, 2930)
+scale = Vector2(2, 2)
